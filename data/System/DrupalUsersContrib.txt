@@ -1,0 +1,87 @@
+
+<a href="http://www.drupal.org" ><img src="%ATTACHURL%/Drupal.png" style="float: right; padding:30px;" /></a>
+
+---+!! DrupalUsersContrib Contrib Package
+
+*tested with Drupal v6.5*
+
+
+This Contrib enables you to replace the Foswiki User and Groups system with a read only access to the 
+User and Groups in a [[http://drupal.com/][Drupal]] Database. Registration of new users and their 
+association with Groups is then _only_ handled by Drupal, making it possible to remove the distributed Main web.
+
+Usernames with spaces work fine, and Drupal Roles are mapped into Foswiki Groups.
+
+You are advised to use the same same host for Foswiki and the Drupal Database, 
+otherwise user query performance (happens every request) can severely degrade the response time.
+
+By selecting DrupalLogin, Foswiki will also attempt to use the Drupal 'remember me' cookie
+ though this requires the Foswiki and Drupal host names to be the same, and can cause some users issues especially if updates are made to Drupal.
+
+<a href="http://wikiring.com/" ><img src="%ATTACHURL%/wikiringlogo.png" style="float: right; padding:30px;" /></a>
+
+---++ Settings
+
+To use DrupalUsersMapping, you need to set the following settings in the "Security setup" in =configure=
+   * UserMappingManager = 'Foswiki::Users::DrupalUserMapping'
+   * (optional) LoginManager = 'Foswiki::LoginManager::DrupalLogin'
+   (This setting will allow Foswiki to use the session cookie that Drupal provides.)
+
+And then set the Drupal specific settings in the 
+=User Managers= - =Drupal User Manager= Section
+
+The DSN to connect to the Drupal Database.
+   * $Foswiki::cfg{Plugins}{DrupalUser}{DBI_dsn} = 'dbi:mysql:drupal:localhost';
+
+The user to connect to the phpBB3 Database.
+   * $Foswiki::cfg{Plugins}{DrupalUser}{DBI_username} = 'mysql_user';
+
+The password to connect to the phpBB3 Database.
+   * $Foswiki::cfg{Plugins}{DrupalUser}{DBI_password} = 'mysql_password';
+
+The hostname that both your Drupal site and your Foswiki Site are at.
+this is used to identify the Drupal session cookie, and so assumes there is 
+only _one_ hostname used to access your site. (leave blank to use hostname from URL request.
+   * $Foswiki::cfg{Plugins}{DrupalUser}{DrupalHostname} = '';
+
+Over-ride Foswiki authentication using _only_ the Drupal sessions
+If there is no Drupal Session cookie, Foswiki will use the Guest user.
+NOTE: you will need to specify a Drupal Login UI URL for Foswiki to redirect to to authenticate
+   * $Foswiki::cfg{Plugins}{DrupalUser}{DrupalAuthOnly} = $FALSE;
+Drupal Login UI URL for Foswiki to redirect to to authenticate - used if =DrupalAuthOnly= is set to true
+   * $Foswiki::cfg{Plugins}{DrupalUser}{DrupalAuthURL} = 'http://drupal/blog?return=%BASEWEB%.%BASETOPIC%';
+
+---++ Installation Instructions
+<!--
+   * One line description:
+      * Set SHORTDESCRIPTION = replace the Foswiki User and Groups System with Drupal's
+-->
+
+   * Run ==%TOPIC%_installer.pl== to automatically check and install other modules that this module depends on. 
+     You can also do this step manually. Dependencies:
+     %$DEPENDENCIES%
+
+   * set =Foswiki::Users::DrupalUserMapping= as your =UserMapping= in configure's Security section
+   * set =Foswiki::LoginManager::DrupalLogin= as your =LoginManager= in configure's Security section
+   * set =none= as your =PasswordManager= in configure's Security section
+   * set the ={AdminGroup}= in the configure security section to one of the Drupal Roles (or create an AdminGroup role)
+   * configure DrupalUsersContrib from the *User Managers* / *Drupal User Manager* section in configure
+      * this needs a DBI connection string to your Drupal database, and a valid username and password for it.
+   * Test if the installation was successful:
+      * see also [[Sandbox.PluginTest%TOPIC%]]
+
+---++ Contrib Info
+
+|  Plugin Author: | Foswiki:Main.SvenDowideit - <img src="%ATTACHURL%/wikiring.png" /> [[http://www.wikiring.com][WikiRing.com]] |
+|  Copyright: | &copy; 2006-2009, SvenDowideit@fosiki.com with help from &copy; 2008 Isaac Lin, &copy; 2009 Will Norris |
+|  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
+|  Dependencies: | %$DEPENDENCIES% |
+|  Version: | $Rev$ |
+|  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  21 Mar 2009 | re-write to use better DBI, new multi-db, cached connections, and convert to Drupal | 
+|  13 Mar 2009 | support for phpBB2 passwords - WN |
+|  12 Mar 2009 | phpBB group and admin support  - WN |
+|  11 Mar 2009 | convert from Foswiki:Extensions.JoomlaUsersContrib to phpBB  - WN |
+|  2006 | initial version of Foswiki:Extensions.JoomlaUsersContrib |
+|  Home: | http://foswiki.org/Extensions/%TOPIC% |
+|  Support: | http://foswiki.org/Support/%TOPIC% |

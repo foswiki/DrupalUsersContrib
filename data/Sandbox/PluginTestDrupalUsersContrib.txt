@@ -1,0 +1,17 @@
+
+| *USERINFO* | %USERINFO{format="$emails, $username, $wikiname, $wikiusername, $groups and $admin"}% |
+| *USERNAME* | %USERNAME% |
+| *WIKINAME* | %WIKINAME% |
+| *WIKIUSERNAME* | %WIKIUSERNAME% |
+| *GROUPS* | %USERINFO{format="$groups"}% |
+| *ISADMIN* | %USERINFO{format="$admin"}% |
+| *WIKIUSERSTOPIC* | [[%USERSWEB%.%WIKIUSERSTOPIC%]] |
+
+---++ *GROUPS* 
+%GROUPS%
+
+---++ *IF* test (assumes you have created a role called 'other people' and that the logged in user has the role
+IF{"'%WIKINAME' ingroup 'other people'" then="yes" else="no"}
+   * %IF{"'%USERNAME%' ingroup 'other people'" then="yes" else="no"}%
+----
+samples/test page for %SYSTEMWEB%.DrupalUsersContrib

@@ -1,0 +1,4 @@
+Foswiki::Contrib::DbiContrib, >0, perl, Simplifies database communications to Foswiki
+DBIx::SQLEngine, >=0.93, CPAN, (and its pre-requisites) Extends DBI with High-Level Operations
+DBD::mysql, >=3.0000, CPAN, (and its pre-requisites) MySQL driver for the Perl5 Database Interface (DBI)
+Drupal, >=6.5, external, 

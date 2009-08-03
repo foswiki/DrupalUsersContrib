@@ -1,0 +1,10 @@
+data/System/DrupalUsersContrib.txt  Plugin doc page
+data/Sandbox/PluginTestDrupalUsersContrib.txt  Plugin samples page
+lib/Foswiki/Contrib/DrupalUsersContrib.pm  Plugin Perl module 
+lib/Foswiki/LoginManager/DrupalLogin.pm use Drupal cookie for session initilaisation
+lib/Foswiki/Users/DrupalUserMapping.pm get User and Group information from Drupal Database
+lib/Foswiki/Contrib/DrupalUsersContrib/Config.spec
+pub/System/DrupalUsersContrib/wikiring.png
+pub/System/DrupalUsersContrib/Drupal.png
+templates/login.drupal.tmpl
+
