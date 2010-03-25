@@ -17,7 +17,8 @@
 # As per the GPL, removal of this notice is prohibited.
 
 package Foswiki::Users::DrupalUserMapping;
-use base 'Foswiki::UserMapping';
+use Foswiki::UserMapping;
+our @ISA = qw( Foswiki::UserMapping );
 
 use strict;
 use Assert;
